@@ -4,13 +4,13 @@ import NavBar from './NavBar.jsx';
 import img1 from '../Images/img1.jpeg';
 
 const theme = {
-  bg: "#FAFAFA",           
-  primary: "#171717",      
-  secondary: "#737373",    
-  textMain: "#171717",    
-  textSub: "#525252",     
-  glass: "rgba(255, 255, 255, 0.9)", 
-  glassBorder: "#E5E5E5",  
+  bg: "#FAFAFA",
+  primary: "#171717",
+  secondary: "#737373",
+  textMain: "#171717",
+  textSub: "#525252",
+  glass: "rgba(255, 255, 255, 0.9)",
+  glassBorder: "#E5E5E5",
 };
 
 const GitHubIcon = () => (
@@ -36,6 +36,7 @@ const Container = styled.div`
     radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.1) 0px, transparent 50%),
     radial-gradient(at 100% 100%, rgba(219, 39, 119, 0.1) 0px, transparent 50%);
   font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
 `;
 
 const CardContainer = styled.div`
@@ -43,8 +44,36 @@ const CardContainer = styled.div`
   width: 95vw; 
   max-width: 1400px;
   margin-top: 20px;
-  height: calc(100vh - 110px);
+  min-height: calc(100vh - 110px); 
   gap: 20px;
+  padding-bottom: 40px; 
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    height: auto;
+  }
+`;
+
+const PageColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: ${props => props.flex || 1};
+  
+  @media (max-width: 1024px) {
+    flex: auto;
+    width: 100%;
+  }
+`;
+
+const PageRow = styled.div`
+  display: flex;
+  gap: 20px;
+  flex: ${props => props.flex || 1};
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const GlassCard = styled.div`
@@ -80,6 +109,10 @@ const RoleTitle = styled.h1`
   background: linear-gradient(135deg, ${theme.textMain} 0%, ${theme.primary} 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  
+  @media (max-width: 768px) {
+    font-size: 2.2rem;
+  }
 `;
 
 const SubText = styled.p`
@@ -118,6 +151,10 @@ const ProfileImg = styled.img`
   object-fit: cover;
   border-radius: 20px;
   border: 1px solid white;
+  
+  @media (max-width: 768px) {
+    height: 300px;
+  }
 `;
 
 const TechPill = styled.span`
@@ -171,6 +208,10 @@ const SocialContainer = styled.div`
   gap: 15px;
   width: 100%;
   justify-content: space-between;
+  
+  @media (max-width: 480px) {
+     flex-direction: column;
+  }
 `;
 
 const SocialLink = styled.a`
@@ -226,15 +267,16 @@ const ConnectButton = styled.a`
   span { position: relative; z-index: 2; }
 `;
 
+
 const HomePage = () => {
   return (
     <Container>
       <NavBar />
       
       <CardContainer>
-        <div style={{ flex: 2.2, display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <PageColumn flex={2.2}>
           
-          <div style={{ flex: 1.4, display: 'flex', gap: '20px' }}>
+          <PageRow flex={1.4}>
             <GlassCard flex={1.5} justify="center">
               <div style={{ marginBottom: '15px' }}>
                 <span style={{ background: '#EEF2FF', color: theme.primary, padding: '5px 10px', borderRadius: '20px', fontSize: '0.8rem', fontWeight: 'bold' }}>
@@ -252,10 +294,9 @@ const HomePage = () => {
             <GlassCard flex={1} style={{ padding: '5px' }}>
               <ProfileImg src={img1} alt="Sreepathy Joshy" />
             </GlassCard>
-          </div>
+          </PageRow>
 
-          <div style={{ flex: 1, display: 'flex', gap: '20px' }}>
-            
+          <PageRow flex={1}>
             <GlassCard flex={1}>
               <SectionTitle>Background</SectionTitle>
               <SubText style={{ fontSize: '0.9rem' }}>
@@ -283,10 +324,10 @@ const HomePage = () => {
                 <TechPill>Git</TechPill>
               </PillContainer>
             </GlassCard>
-          </div>
-        </div>
+          </PageRow>
+        </PageColumn>
 
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <PageColumn flex={1}>
           
           <GlassCard flex={3}>
             <SectionTitle>Featured Work</SectionTitle>
@@ -349,7 +390,7 @@ const HomePage = () => {
             </ConnectButton>
           </GlassCard>
         
-        </div>
+        </PageColumn>
       </CardContainer>
     </Container>
   )

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import NavBar from './NavBar.jsx';
+import image from '../Images/productImage.png';
 
 const theme = {
   bg: "#FAFAFA",          
@@ -209,7 +210,6 @@ const Projects = () => {
                   <Tag key={tag} style={{ background: '#000', color: '#FFF', border: 'none' }}>{tag}</Tag>
                 ))}
               </TagContainer>
-              <LinkButton href="#">View Case Study →</LinkButton>
             </div>
             
             <div style={{ 
@@ -225,7 +225,7 @@ const Projects = () => {
               fontWeight: '500',
               width: '100%'
             }}>
-              Project Preview
+              <img src={image} alt="DashFlow Product" style={{ maxWidth: '100%', maxHeight: '100%', borderRadius: '10px' }} />
             </div>
           </FeaturedCard>
 
